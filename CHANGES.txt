@@ -1,0 +1,3 @@
+Keysight AFG inclusion
+Agilent DMM inclusion
+Bugs fixed for wrong object addressing in thermo and hp dmm
