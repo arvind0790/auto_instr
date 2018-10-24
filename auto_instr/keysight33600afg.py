@@ -17,7 +17,7 @@ class keyafg33600(object):
         else:
             print("Invalid input")
     
-    def shape(instr, channel, shape):
+    def shape(instr, channel, shape, duty_cycle=50):
         if shape == 'SQU':
             instr.write('SOUR%i:FUNC:SHAP SQU' %channel)  # SIN,SQU,RAMP,PULS
         elif shape == 'SIN':
@@ -26,6 +26,7 @@ class keyafg33600(object):
             instr.write('SOUR%i:FUNC:SHAP RAMP' %channel)
         elif shape == 'PULS':
             instr.write('SOUR%i:FUNC:SHAP PULS' %channel)
+            instr.write('SOUR%i:PULS:DCYC %f'%duty_cycle)
         else:
             print("Invalid input")
 
@@ -42,10 +43,10 @@ class keyafg33600(object):
     def amplitude(instr, channel, amplitude):
         instr.write('SOUR%i:VOLT:AMPL %fVPP' % (channel, amplitude))
     
-    def quickset(instr, channel, imp, shape, frequency, phase, offset, amplitude):
+    def quickset(instr, channel, imp, shape, frequency, phase, offset, amplitude,duty_cycle=50):
         keyafg33600.on(instr, channel)
         keyafg33600.outimp(instr, channel, imp)
-        keyafg33600.shape(instr, channel, shape)
+        keyafg33600.shape(instr, channel, shape,duty_cycle)
         keyafg33600.freq(instr, channel, frequency)
         keyafg33600.phase(instr, channel, phase)
         keyafg33600.offset(instr, channel, offset)

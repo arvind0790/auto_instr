@@ -14,3 +14,4 @@ from .datalog import datalog
 from .hpmm3458A import hp3458
 from .keysight33600afg import keyafg33600
 from .agilent34405dmm import agi34405
+from .keithley2600 import ke2600

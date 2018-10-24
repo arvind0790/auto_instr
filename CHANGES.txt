@@ -1,3 +1,5 @@
-Keysight AFG inclusion
-Agilent DMM inclusion
-Bugs fixed for wrong object addressing in thermo and hp dmm
+1) Added Keithley dual channel SMU
+2) Added AFG duty cycle control
+3) control reference levels in scope for rise/fall 
+5) Added generic delay function in scope 
+6) Added single_acquition_trigger function in scope

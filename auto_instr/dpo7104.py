@@ -21,6 +21,14 @@ class scope(object):
     def autoset(instr):
         instr.write('AUTOS EXEC')
 
+    def set_abs_ref_lev(instr,abs_min_ref_lev,abs_max_ref_lev):
+        instr.write('MEASU:IMM:REFL:METH ABS')
+        instr.write('MEASU:IMM:REFL:ABS:HIGH %f' % abs_max_ref_lev)
+        instr.write('MEASU:IMM:REFL:ABS:LOW %f' % abs_min_ref_lev)
+    def set_perc_ref_lev(instr,perc_min_ref_lev=10,perc_max_ref_lev=90):
+        instr.write('MEASU:IMM:REFL:METH PERC')
+        instr.write('MEASU:IMM:REFL:PERC:HIGH %f' % perc_max_ref_lev)
+        instr.write('MEASU:IMM:REFL:PERC:LOW %f' % perc_min_ref_lev)
 ############ Acquisition modes ########################
 
     def run(instr):
@@ -92,6 +100,8 @@ class scope(object):
     def measure_negative_pulse_width(instr):
         instr.write('MEASU:IMM:TYP NWI')
         return float(instr.ask('MEASU:IMM:VAL?'))
+
+
  ############### Cursor functions ############
 
     def horizontal_curser(instr):
@@ -129,6 +139,15 @@ class scope(object):
         instr.write('TRIG:A:EDGE:SLO:CH%i FALL' % ch_no)
         instr.write('TRIG:A:LEV:CH%i %f' %(ch_no, lev))
 
+
+    def single_acquisition_quickset(instr,ch_no,lev,edge='RISE'): #use FALL for falling egde trigger
+        scope.run(instr)
+        if edge =='FALL':
+            scope.trigger_quickset_fall(instr, ch_no,lev)
+        else:
+            scope.trigger_quickset_rise(instr, ch_no, lev)
+        scope.meas_cls(instr)
+        scope.single(instr)
 ############## DPO JET functions (for jitter measurement) #############
     
     def dpojet_clr_meas(instr):
@@ -168,8 +187,15 @@ class scope(object):
         scope.dpojet_stop(instr)
         return meas_val
 
-
 ############ Custom functions #########################
+    def delay(instr, ch1=1, ch2=2,edge_ch1 = 'RISE',edge_ch2 = 'FALL',direction ='FORW'): #use BACKW for reverse direction
+        instr.write('MEASU:IMM:SOU1 CH%i' %ch1)
+        instr.write('MEASU:IMM:SOU2 CH%i' %ch2)
+        instr.write('MEASU:IMM:DEL:EDGE1 %s'%edge_ch1)
+        instr.write('MEASU:IMM:DEL:EDGE2 %s'%edge_ch2)
+        instr.write('MEASU:IMM:DEL:DIREC %s'%direction)
+        instr.write('MEASU:IMM:TYP DEL')
+        return float(instr.ask('MEASU:IMM:VAL?'))
 
     def delay_imo(instr):
         instr.write('MEASU:IMM:SOU1 CH1')

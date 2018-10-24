@@ -16,7 +16,7 @@ class tekafg3102(object):
         else:
             print("Invalid input")
 
-    def shape(instr, channel, shape):
+    def shape(instr, channel, shape,duty_cycle=50):
         if shape == 'SQU':
             instr.write('SOUR%i:FUNC:SHAP SQU' %channel)  # SIN,SQU,RAMP,PULS
         elif shape == 'SIN':
@@ -25,6 +25,7 @@ class tekafg3102(object):
             instr.write('SOUR%i:FUNC:SHAP RAMP' %channel)
         elif shape == 'PULS':
             instr.write('SOUR%i:FUNC:SHAP PULS' %channel)
+            instr.write('SOUR%i:PULS:DCYC %f' % duty_cycle)
         else:
             print("Invalid input")
 
@@ -41,10 +42,10 @@ class tekafg3102(object):
     def amplitude(instr, channel, amplitude):
         instr.write('SOUR%i:VOLT:AMPL %fVPP' % (channel, amplitude))
 
-    def quickset(instr, channel, imp, shape, frequency, phase, offset, amplitude):
+    def quickset(instr, channel, imp, shape, frequency, phase, offset, amplitude,duty_cycle=50):
         tekafg3102.on(instr, channel)
         tekafg3102.outimp(instr, channel, imp)
-        tekafg3102.shape(instr, channel, shape)
+        tekafg3102.shape(instr, channel, shape,duty_cycle)
         tekafg3102.freq(instr, channel, frequency)
         tekafg3102.phase(instr, channel, phase)
         tekafg3102.offset(instr, channel, offset)
