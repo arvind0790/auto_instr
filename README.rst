@@ -23,7 +23,6 @@ Installation
 
    pip install auto-instr
 
-
 Source code, bug reports, patches
 ---------------------------------
 auto-instr on GitHub:
@@ -31,8 +30,9 @@ https://github.com/arvind0790/auto_instr
 
 User manual
 -----------
-User manual for auto-instr is available in the sources docs/manual/ directory. 
+User manual for auto-instr is available online at:
+https://auto-instr.readthedocs.io/ 
 
 Changelog
 ---------
-See CHANGES.rst
+See CHANGES.txt
