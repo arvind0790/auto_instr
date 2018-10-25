@@ -1,5 +1,5 @@
 ==================================
-agi34405
+agi34405- Digital multimeter
 ==================================
 
-This class is written for agilent 34405 digital multimeter. The methods are same as ke2000 class.
+This class is written for Agilent 34405 digital multimeter. The methods are same as ke2000 class.

@@ -1,5 +1,5 @@
 ==================================
-tempforce
+tempforce- Thermal Inducing System
 ==================================
 
 This class is written for the Temptronic Thermal Inducing System, ATE corp. It supports following methods.

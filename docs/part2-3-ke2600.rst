@@ -1,5 +1,0 @@
-==================================
-ke2600
-==================================
-
-This class is written for the Keithley2600 dual channel source meter. The methods are same as ke2400 class. Only difference is the extra argument for channel selection, since Keithley2600 has two channels.

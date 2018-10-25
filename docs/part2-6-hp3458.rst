@@ -1,0 +1,5 @@
+==================================
+hp3458- Digital multimeter
+==================================
+
+This class is written for HP 3458 precision digital multimeter. The methods are same as ke2000 class.

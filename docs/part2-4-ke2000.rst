@@ -1,9 +1,10 @@
 ==================================
-ke2000
+Keithley 2000 - Digital Multimeter
 ==================================
 
 This class is written for the Keithley2000 digital multimeter. It supports following methods.
 
+from auto_instr import ke2400
 ---------------
 Read DC voltage
 ---------------
