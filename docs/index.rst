@@ -13,10 +13,3 @@ Contents:
    Installation
    Instrument_ready
    part2_classes
-
-Indices and tables
-------------------
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
