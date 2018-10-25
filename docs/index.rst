@@ -4,7 +4,7 @@
 Python auto_instr Library User Manual
 -------------------------------------
 ---------
-Contents:
+Contents
 ---------
 .. toctree::
    :maxdepth: 3
