@@ -48,7 +48,7 @@ class ke2000(object):
         data= instr.read()
         return data
 
-    #####    AC VOLTAGE   ########
+    #####    AC VOLTAGE   #########
     def read_ACV(instr):
         instr.write("*CLS")
         instr.write('INIT:CONT OFF;:ABORT')
