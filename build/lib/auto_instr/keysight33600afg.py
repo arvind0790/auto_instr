@@ -52,3 +52,51 @@ class keyafg33600(object):
         keyafg33600.offset(instr, channel, offset)
         keyafg33600.amplitude(instr, channel, amplitude)
 
+    def Burst_Exttrig_mode(instr, channel, nocyc, exttriglev, pha):
+        instr.write('SOUR%i:BURS:NCYC %i' % (channel, nocyc))
+        instr.write('TRIG1:SOUR EXT')
+        instr.wite('TRIG1:LEV %f' % exttriglev)
+        instr.write('TRIG1:SLOP POS')
+        instr.write('SOUR%i:BURST:PHASE %f' % (channel, pha))
+        instr.write('SOUR%i:BURS:STAT ON' % channel)
+        instr.write('OUTP%i:STAT ON' % channel)
+
+    def highlow(instr, channel, low, high, frequency, imp):
+        keyafg33600.shape(instr, channel,'SQU')
+        keyafg33600.freq(instr, channel, frequency)
+        keyafg33600.outimp(instr,channel, imp)
+        instr.write('SOUR%i:VOLT:LEV:IMMediate:LOW %fV' % (channel,low))
+        instr.write('SOUR%i:VOLT:LEV:IMMediate:HIGH %fV'% (channel,high))
+        keyafg33600.on(instr,channel)
+
+    def dutycycle(instr, channel, dutycycle):
+        instr.write('SOUR%i:PULSe:DCYCle %f' % (channel, dutycycle))
+
+    def pulsewidth(instr, channel, pulsewidth):
+        instr.write('SOUR%i:PULSe:WIDTh %fns' % (channel, pulsewidth))
+
+    def Burst_Exttrig_mode(instr,channel,nocyc,exttriglev,pha):
+        instr.write('SOUR%i:BURS:NCYC %i'%(channel,nocyc))
+        instr.write('TRIG1:SOUR EXT')
+        instr.wite('TRIG1:LEV %f'%exttriglev)
+        instr.write('TRIG1:SLOP POS')
+        instr.write('SOUR%i:BURST:PHASE %f'%(channel,pha))
+        instr.write('SOUR%i:BURS:STAT ON'%channel)
+        instr.write('OUTP%i:STAT ON'%channel)
+
+    def Burst_Remote_mode(instr, channel, nocyc, pha):
+        instr.write('SOUR%i:BURS:NCYC %i' % (channel, nocyc))
+        instr.write('TRIG1:SOUR BUS')
+        instr.write('SOUR%i:BURST:PHASE %f' % (channel, pha))
+        instr.write('SOUR%i:BURS:STAT ON' % channel)
+        instr.write('OUTP%i:STAT ON' % channel)
+
+    def Burst_Immediate_mode(instr, channel, nocyc, pha, per):
+        instr.write('SOUR%i:BURS:NCYC %i' % (channel, nocyc))
+        instr.write('TRIG1:SOUR IMM')
+        instr.write('SOUR%i:BURST:PHASE %f' % (channel, pha))
+        instr.write('SOUR%i:BURS:INT:PER %f' % (channel, per))
+        instr.write('SOUR%i:BURS:STAT ON' % channel)
+        instr.write('OUTP%i:STAT ON' % channel)
+
+

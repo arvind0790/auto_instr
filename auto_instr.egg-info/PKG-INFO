@@ -1,12 +1,11 @@
 Metadata-Version: 1.1
 Name: auto-instr
-Version: 0.7.5
+Version: 0.8
 Summary: Library for automating scientific instruments.
 Home-page: https://github.com/arvind0790/auto_instr
 Author: Arvind Kumar
 Author-email: vind0790@gmail.com
 License: MIT License
-Description-Content-Type: UNKNOWN
 Description: Python auto-instr library
         *************************
         

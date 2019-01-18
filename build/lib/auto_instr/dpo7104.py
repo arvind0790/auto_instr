@@ -29,6 +29,16 @@ class scope(object):
         instr.write('MEASU:IMM:REFL:METH PERC')
         instr.write('MEASU:IMM:REFL:PERC:HIGH %f' % perc_max_ref_lev)
         instr.write('MEASU:IMM:REFL:PERC:LOW %f' % perc_min_ref_lev)
+
+    def set_abs_mid_ref_lev(instr, abs_mid1_ref_lev,abs_mid2_ref_lev):
+        instr.write('MEASU:IMM:REFL:METH ABS')
+        instr.write('MEASU:IMM:REFL:ABS:MID1 %f' % abs_mid1_ref_lev)
+        instr.write('MEASU:IMM:REFL:ABS:MID2 %f' % abs_mid2_ref_lev)
+    def set_perc_mid_ref_lev(instr,perc_mid1_ref_lev=50,perc_mid2_ref_lev=50):
+        instr.write('MEASU:IMM:REFL:METH PERC')
+        instr.write('MEASU:IMM:REFL:PERC:MID1 %f' % perc_mid1_ref_lev)
+        instr.write('MEASU:IMM:REFL:PERC:MID2 %f' % perc_mid2_ref_lev)
+
 ############ Acquisition modes ########################
 
     def run(instr):
@@ -101,6 +111,12 @@ class scope(object):
         instr.write('MEASU:IMM:TYP NWI')
         return float(instr.ask('MEASU:IMM:VAL?'))
 
+    def export_screenshot(instr,filename):
+        # print(filename)
+        # sleep(1)
+        instr.write('EXP:FILEN ' + '\"' + filename + '.PNG' + '\"')
+        instr.write('EXP STAR')
+        instr.write('EXP:FOR PNG')
 
  ############### Cursor functions ############
 
@@ -148,6 +164,20 @@ class scope(object):
             scope.trigger_quickset_rise(instr, ch_no, lev)
         scope.meas_cls(instr)
         scope.single(instr)
+    
+    def scope_trig_pulsewidth(instr,ch_no,lev,upperlimit,lowerlimit):
+        instr.write('ACQ:STATE RUN')
+        instr.write('ACQ:STATE ON')
+        instr.write('ACQ:STOPA RUNST')
+        instr.write('TRIG:A:PUL:CLA WID')
+        instr.write('TRIG:A:PUL:WIDTH:LOWLIMIT %f'%upperlimit)
+        instr.write('TRIG:A:PUL:WIDTH:HIGHLIMIT %f'%lowerlimit)
+        instr.write('TRIG:A:LEV:CH%i %f'%(ch_no,lev))
+        instr.write('TRIG:A:PUL:WIDTH:POL POSITIVE')
+        instr.write('TRIG:A:PUL:WIDTH:QUAL OCC')
+        instr.write('TRIG:A:PUL:WIDTH:WHE WIT')
+        instr.write('MEASU:STATI:COUN RESET')
+        instr.write('ACQ:STOPA SEQ')
 ############## DPO JET functions (for jitter measurement) #############
     
     def dpojet_clr_meas(instr):

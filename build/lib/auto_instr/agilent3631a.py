@@ -24,3 +24,5 @@ class agi3631(object):
         curr_data = instr.read()
         data = volt_data.split(',') + curr_data.split(',')
         return data
+		
+#Test
