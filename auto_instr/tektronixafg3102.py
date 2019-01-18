@@ -61,24 +61,42 @@ class tekafg3102(object):
         instr.write('SOUR%i:BURS:NCYCles 1' % channel)
         instr.write('SOUR%i:FREQ:FIX %fHz' % (channel, freq))
         instr.write('OUTP%i:STAT 1' % channel)
-    def Burst_Exttrig_mode(instr,nocyc,exttriglev,pha):
-        instr.write('SOUR1:BURS:NCYC %i'%nocyc)
+
+    def highlow(instr, channel, low, high, frequency, imp):
+        tekafg3102.shape(instr, channel, 'SQU')
+        tekafg3102.freq(instr, channel, frequency)
+        tekafg3102.outimp(instr, channel, imp)
+        instr.write('SOUR%i:VOLT:LEV:IMMediate:LOW %fV' % (channel, low))
+        instr.write('SOUR%i:VOLT:LEV:IMMediate:HIGH %fV' % (channel, high))
+        tekafg3102.on(instr, channel)
+
+    def dutycycle(instr, channel, dutycycle):
+        instr.write('SOUR%i:PULSe:DCYCle %f' % (channel, dutycycle))
+
+    def pulsewidth(instr, channel, pulsewidth):
+        instr.write('SOUR%i:PULSe:WIDTh %fns' % (channel, pulsewidth))
+
+
+    def Burst_Exttrig_mode(instr,channel,nocyc,exttriglev,pha):
+        instr.write('SOUR%i:BURS:NCYC %i'%(channel,nocyc))
         instr.write('TRIG1:SOUR EXT')
         instr.wite('TRIG1:LEV %f'%exttriglev)
-        instr.write('TRIG:SLOP POS')
-        instr.write('SOUR1:BURST:PHASE %f'%pha)
-        instr.write('SOUR1:BURS:STAT ON')
-        instr.write('OUTP1:STAT ON')
-    def Burst_Remote_mode(instr,nocyc,pha):
-        instr.write('SOUR1:BURS:NCYC %i'%nocyc)
+        instr.write('TRIG1:SLOP POS')
+        instr.write('SOUR%i:BURST:PHASE %f'%(channel,pha))
+        instr.write('SOUR%i:BURS:STAT ON'%channel)
+        instr.write('OUTP%i:STAT ON'%channel)
+
+    def Burst_Remote_mode(instr,channel,nocyc,pha):
+        instr.write('SOUR%i:BURS:NCYC %i'%(channel,nocyc))
         instr.write('TRIG1:SOUR BUS')       
-        instr.write('SOUR1:BURST:PHASE %f'%pha)
-        instr.write('SOUR1:BURS:STAT ON')
-        instr.write('OUTP1:STAT ON')
-    def Burst_Immediate_mode(instr,nocyc,pha,per):
-        instr.write('SOUR1:BURS:NCYC %i'%nocyc)
+        instr.write('SOUR%i:BURST:PHASE %f'%(channel,pha))
+        instr.write('SOUR%i:BURS:STAT ON'%channel)
+        instr.write('OUTP%i:STAT ON'%channel)
+
+    def Burst_Immediate_mode(instr,channel,nocyc,pha,per):
+        instr.write('SOUR%i:BURS:NCYC %i'%(channel,nocyc))
         instr.write('TRIG1:SOUR IMM')
-        instr.write('SOUR1:BURST:PHASE %f'%pha)
-        instr.write('SOUR1:BURS:INT:PER %f'%per)
-        instr.write('SOUR1:BURS:STAT ON')
-        instr.write('OUTP1:STAT ON')
+        instr.write('SOUR%i:BURST:PHASE %f'%(channel,pha))
+        instr.write('SOUR%i:BURS:INT:PER %f'%(channel,per))
+        instr.write('SOUR%i:BURS:STAT ON'%channel)
+        instr.write('OUTP%i:STAT ON'%channel)
