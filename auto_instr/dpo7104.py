@@ -148,6 +148,19 @@ class scope(object):
             scope.trigger_quickset_rise(instr, ch_no, lev)
         scope.meas_cls(instr)
         scope.single(instr)
+    def scope_trig_pulsewidth(instr,ch_no,lev,upperlimit,lowerlimit):
+        instr.write('ACQ:STATE RUN')
+        instr.write('ACQ:STATE ON')
+        instr.write('ACQ:STOPA RUNST')
+        instr.write('TRIG:A:PUL:CLA WID')
+        instr.write('TRIG:A:PUL:WIDTH:LOWLIMIT %f'%upperlimit)
+        instr.write('TRIG:A:PUL:WIDTH:HIGHLIMIT %f'%lowerlimit)
+        instr.write('TRIG:A:LEV:CH%i %f'%(ch_no,lev))
+        instr.write('TRIG:A:PUL:WIDTH:POL POSITIVE')
+        instr.write('TRIG:A:PUL:WIDTH:QUAL OCC')
+        instr.write('TRIG:A:PUL:WIDTH:WHE WIT')
+        instr.write('MEASU:STATI:COUN RESET')
+        instr.write('ACQ:STOPA SEQ')
 ############## DPO JET functions (for jitter measurement) #############
     
     def dpojet_clr_meas(instr):

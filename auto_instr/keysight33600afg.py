@@ -51,4 +51,25 @@ class keyafg33600(object):
         keyafg33600.phase(instr, channel, phase)
         keyafg33600.offset(instr, channel, offset)
         keyafg33600.amplitude(instr, channel, amplitude)
-
+    def Burst_Exttrig_mode(instr,nocyc,exttriglev,pha):
+        instr.write('SOUR1:BURS:NCYC %i'%nocyc)
+        instr.write('TRIG1:SOUR EXT')
+        instr.wite('TRIG1:LEV %f'%exttriglev)
+        instr.write('TRIG:SLOP POS')
+        instr.write('SOUR1:BURST:PHASE %f'%pha)
+        instr.write('SOUR1:BURS:STAT ON')
+        instr.write('OUTP1:STAT ON')
+    def Burst_Remote_mode(instr,nocyc,pha):
+        instr.write('SOUR1:BURS:NCYC %i'%nocyc)
+        instr.write('TRIG1:SOUR BUS')       
+        instr.write('SOUR1:BURST:PHASE %f'%pha)
+        instr.write('SOUR1:BURS:STAT ON')
+        instr.write('OUTP1:STAT ON')
+    def Burst_Immediate_mode(instr,nocyc,pha,per):
+        instr.write('SOUR1:BURS:NCYC %i'%nocyc)
+        instr.write('TRIG1:SOUR IMM')
+        instr.write('SOUR1:BURST:PHASE %f'%pha)
+        instr.write('SOUR1:BURS:INT:PER %f'%per)
+        instr.write('SOUR1:BURS:STAT ON')
+        instr.write('OUTP1:STAT ON')
+        
