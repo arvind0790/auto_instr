@@ -51,3 +51,21 @@ Quick set
 ---------
 - Syntax: quickset(instr, channel, imp, shape, frequency, phase, offset, amplitude,duty_cycle=50)
 - Description : This method is used for configuring the AFG in one step. Arguments are instrument object, channel number, output impedance, shape, frequency, phase, offset, amplitude and duty cycle(required only for pulse).
+
+-------
+highlow
+-------
+- Syntax: highlow(instr, channel, low, high, frequency, imp)
+- Description: It sets the desired high and low levels of a square waveform.
+
+---------
+Dutycycle
+---------
+- Syntax: dutycycle(instr, channel, dutycycle)
+- Description: It sets the dutycycle of the pulse.
+
+----------
+Pulsewidth
+----------
+- Syntax: dutycycle(instr, channel, pulsewidth)
+- Description: It sets the pulsewidth of the pulse.
