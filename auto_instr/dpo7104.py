@@ -73,43 +73,43 @@ class scope(object):
 
     def measure_amp(instr):
         instr.write('MEASU:IMM:TYP AMP')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def measure_high(instr):
         instr.write('MEASU:IMM:TYP HIGH')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def measure_low(instr):
         instr.write('MEASU:IMM:TYP LOW')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def measure_freq(instr):
         instr.write('MEASU:IMM:TYP FREQ')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def measure_positive_duty(instr):
         instr.write('MEASU:IMM:TYP PDU')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def measure_negative_duty(instr):
         instr.write('MEASU:IMM:TYP NDU')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def measure_rise_time(instr):
         instr.write('MEASU:IMM:TYP RIS')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def measure_fall_time(instr):
         instr.write('MEASU:IMM:TYP FALL')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def measure_positive_pulse_width(instr):
         instr.write('MEASU:IMM:TYP PWI')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def measure_negative_pulse_width(instr):
         instr.write('MEASU:IMM:TYP NWI')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def export_screenshot(instr,filename):
         # print(filename)
@@ -127,18 +127,18 @@ class scope(object):
         instr.write('CURSOR:SOURCE 1 CH2')
 
     def vertical_bar_position_query(instr):
-        return str(instr.ask('CURSor:VBArs?'))
+        return str(instr.query('CURSor:VBArs?'))
 
     def diff_between_vericalbar(instr):
-        return float(instr.ask('CURSOR:VBARS:DELTA?'))
+        return float(instr.query('CURSOR:VBARS:DELTA?'))
  
  ############### trigger functions ##################
 
     def trigger_level(instr):
         instr.write('TRIG:A:LEV:CH2 6.2')
 
-    def trigger_level_ask(instr):
-        return float(instr.ask('TRIG:A:LEV:CH2 ?'))
+    def trigger_level_query(instr):
+        return float(instr.query('TRIG:A:LEV:CH2 ?'))
     
     def trigger_quickset(instr, ch_no,lev):
         instr.write('TRIG:A:EDGE:SOU CH%i' %ch_no)
@@ -183,7 +183,7 @@ class scope(object):
     def dpojet_clr_meas(instr):
         instr.write('DPOJET:CLEARALLM')
     def dpojet_state(instr):
-        return instr.ask('DPOJET:STATE?')
+        return instr.query('DPOJET:STATE?')
     def dpojet_run(instr):
         instr.write('DPOJET:STATE RUN')
     def dpojet_stop(instr):
@@ -194,11 +194,11 @@ class scope(object):
     def dpojet_period(instr):
         instr.write('DPOJET:ADDM PERI')
     def dpojet_result(instr):
-        data = instr.ask('DPOJET:MEAS1:RESUL:ALLA?').split(';;')
+        data = instr.query('DPOJET:MEAS1:RESUL:ALLA?').split(';;')
         # print(data)
         return data
     def dpojet_status_query(instr):
-        data = instr.ask('DPOJET:MEAS1:RESUL:ALLA?').split(';;')
+        data = instr.query('DPOJET:MEAS1:RESUL:ALLA?').split(';;')
         curr_popu = int(data[0])
         return curr_popu
     def dpojet_quickset(instr,n):
@@ -225,7 +225,7 @@ class scope(object):
         instr.write('MEASU:IMM:DEL:EDGE2 %s'%edge_ch2)
         instr.write('MEASU:IMM:DEL:DIREC %s'%direction)
         instr.write('MEASU:IMM:TYP DEL')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def delay_imo(instr):
         instr.write('MEASU:IMM:SOU1 CH1')
@@ -234,7 +234,7 @@ class scope(object):
         instr.write('MEASU:IMM:DEL:EDGE2 FALL')
         instr.write('MEASU:IMM:DEL:DIREC FORW')
         instr.write('MEASU:IMM:TYP DEL')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def delay_ilo(instr):
         instr.write('MEASU:IMM:SOU1 CH1')
@@ -243,7 +243,7 @@ class scope(object):
         instr.write('MEASU:IMM:DEL:EDGE2 FALL')
         instr.write('MEASU:IMM:DEL:DIREC FORW')
         instr.write('MEASU:IMM:TYP DEL')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def delay_PDAC(instr):
         instr.write('MEASU:IMM:SOU1 CH1')
@@ -253,7 +253,7 @@ class scope(object):
         instr.write('MEASU:IMM:DEL:DIREC FORW')
         instr.write('MEASU:IMMED:REFL:PERC:MID2 95')
         instr.write('MEASU:IMM:TYP DEL')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def delay_NDAC_small(instr):
         instr.write('MEASU:IMM:SOU1 CH1')
@@ -263,7 +263,7 @@ class scope(object):
         instr.write('MEASU:IMM:DEL:DIREC BACKW')
         instr.write('MEASU:IMMED:REFL:PERC:MID2 30')
         instr.write('MEASU:IMM:TYP DEL')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def delay_NDAC(instr):
         instr.write('MEASU:IMM:SOU1 CH1')
@@ -273,7 +273,7 @@ class scope(object):
         instr.write('MEASU:IMM:DEL:DIREC BACKW')
         instr.write('MEASU:IMMED:REFL:PERC:MID2 10')
         instr.write('MEASU:IMM:TYP DEL')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
     def delay_UV(instr,Cur1_ypos1,cur2_ypos2):
         instr.write('CURS:STATE ON')
@@ -284,8 +284,8 @@ class scope(object):
         instr.write('CURS:SCREEN:YPOSITION1 %f' %Cur1_ypos1)
         instr.write('CURS:SCREEN:YPOSITION2 %f' %cur2_ypos2)
         sleep(4)
-        t1 = float(instr.ask('CURS:SCREEN:XPOSITION1?'))
-        t2 = float(instr.ask('CURS:SCREEN:XPOSITION2?'))
+        t1 = float(instr.query('CURS:SCREEN:XPOSITION1?'))
+        t2 = float(instr.query('CURS:SCREEN:XPOSITION2?'))
         # print(t1)
         # print(t2)
         t3 = float(t2-t1)
@@ -307,8 +307,8 @@ class scope(object):
             # sleep(2)
             instr.write('CURS:WAVE:POS1 %f' % h2)
             sleep(5)
-            y = (instr.ask('CURS:WAVE:HPOS1?'))
-            h = (instr.ask('CURS:WAVE:POS1?'))
+            y = (instr.query('CURS:WAVE:HPOS1?'))
+            h = (instr.query('CURS:WAVE:POS1?'))
             # print(h)
             y1 = float(y[0:5])
             h1 = -float(h[1:5]) * (0.000001)
@@ -334,8 +334,8 @@ class scope(object):
             # sleep(2)
             instr.write('CURS:WAVE:POS1 %f' % h2)
             sleep(5)
-            y = (instr.ask('CURS:WAVE:HPOS1?'))
-            h = (instr.ask('CURS:WAVE:POS1?'))
+            y = (instr.query('CURS:WAVE:HPOS1?'))
+            h = (instr.query('CURS:WAVE:POS1?'))
             # print(y,h)
             y1 = float(y[0:5])
             h1 = -float(h[1:5]) * (0.000001)
@@ -352,7 +352,7 @@ class scope(object):
         instr.write('MEASU:IMM:DEL:EDGE2 RISE')
         instr.write('MEASU:IMM:DEL:DIREC FORW')
         instr.write('MEASU:IMM:TYP DEL')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
         
     def delay_Tdelay_lscsa_ac(instr):
         instr.write('MEASU:IMM:SOU1 CH2')
@@ -361,5 +361,5 @@ class scope(object):
         instr.write('MEASU:IMM:DEL:EDGE2 RISE')
         instr.write('MEASU:IMM:DEL:DIREC FORW')
         instr.write('MEASU:IMM:TYP DEL')
-        return float(instr.ask('MEASU:IMM:VAL?'))
+        return float(instr.query('MEASU:IMM:VAL?'))
 
