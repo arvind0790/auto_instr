@@ -1,13 +1,3 @@
-1) Added highlow function for afg to set high low voltage value for a SQU wave.
-
-2) Added set_set_abs_mid_ref_lev and set_perc_mid_ref_lev for scope to measure delay time.
-
-3) Added export_screenshot for scope.
-
-4) Added dutycycle and pulsewidth for afg.
-
-5) Added pulse trigger for Scope.
-
-6) Added Burst mode functions for AFG.
+1) Added infiniium scope basic functions
 
  
