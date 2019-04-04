@@ -40,7 +40,8 @@ class scope(object):
         instr.write('MEASU:IMM:REFL:PERC:MID2 %f' % perc_mid2_ref_lev)
 
 ############ Acquisition modes ########################
-
+    def clear_all(instr):
+        instr.write('CLEAR ALL')
     def run(instr):
         instr.write('ACQ:STATE RUN')
 
@@ -164,21 +165,32 @@ class scope(object):
             scope.trigger_quickset_rise(instr, ch_no, lev)
         scope.meas_cls(instr)
         scope.single(instr)
+<<<<<<< .mine
+
+
+    def scope_trig_pulsewidth(instr, ch_no, lev, lowerlimit, upperlimit ):
+        instr.write('CLEAR ALL')
+||||||| .r11
+    def scope_trig_pulsewidth(instr,ch_no,lev,upperlimit,lowerlimit):
+=======
     
     def scope_trig_pulsewidth(instr,ch_no,lev,upperlimit,lowerlimit):
+>>>>>>> .r21
         instr.write('ACQ:STATE RUN')
         instr.write('ACQ:STATE ON')
         instr.write('ACQ:STOPA RUNST')
+        instr.write('TRIG:A:PUL:SOU CH%i ' % ch_no)
         instr.write('TRIG:A:PUL:CLA WID')
-        instr.write('TRIG:A:PUL:WIDTH:LOWLIMIT %f'%upperlimit)
-        instr.write('TRIG:A:PUL:WIDTH:HIGHLIMIT %f'%lowerlimit)
-        instr.write('TRIG:A:LEV:CH%i %f'%(ch_no,lev))
+        instr.write('TRIG:A:PUL:WIDTH:LOWLIMIT %f' % lowerlimit)
+        instr.write('TRIG:A:PUL:WIDTH:HIGHLIMIT %f' % upperlimit)
+        instr.write('TRIG:A:LEV:CH%i %f' % (ch_no, lev))
         instr.write('TRIG:A:PUL:WIDTH:POL POSITIVE')
         instr.write('TRIG:A:PUL:WIDTH:QUAL OCC')
         instr.write('TRIG:A:PUL:WIDTH:WHE WIT')
         instr.write('MEASU:STATI:COUN RESET')
         instr.write('ACQ:STOPA SEQ')
-############## DPO JET functions (for jitter measurement) #############
+
+    ############## DPO JET functions (for jitter measurement) #############
     
     def dpojet_clr_meas(instr):
         instr.write('DPOJET:CLEARALLM')
