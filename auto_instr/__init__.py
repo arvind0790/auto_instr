@@ -16,3 +16,4 @@ from .keysight33600afg import keyafg33600
 from .agilent34405dmm import agi34405
 from .keithley2600 import ke2600
 from .infiniium80000 import infi_scope
+from .psw_800 import PSW800
