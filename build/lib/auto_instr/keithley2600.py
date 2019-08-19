@@ -17,7 +17,7 @@ class ke2600(object):
             instr.write("smua.source.leveli = %f"%current)
             instr.write("smua.source.output=smua.OUTPUT_ON")
             instr.write("currenta, voltagea = smua.measure.iv()")
-            volt_data = instr.ask("print(voltagea)")
+            volt_data = instr.query("print(voltagea)")
         if ch==2:
             instr.write('display.smub.measure.func = display.MEASURE_DCVOLTS')
             instr.write('smub.source.func = smub.OUTPUT_DCAMPS')
@@ -25,7 +25,7 @@ class ke2600(object):
             instr.write("smub.source.leveli = %f"%current)
             instr.write("smub.source.output=smub.OUTPUT_ON")
             instr.write("currentb, voltageb = smub.measure.iv()")
-            volt_data = instr.ask("print(voltageb)")
+            volt_data = instr.query("print(voltageb)")
         return volt_data
     def forVmeasI(instr, voltage, curr_cmpl , ch=1):
         if ch==1:
@@ -35,7 +35,7 @@ class ke2600(object):
             instr.write("smua.source.levelv = %f"%voltage)
             instr.write("smua.source.output=smua.OUTPUT_ON")
             instr.write("currenta, voltagea = smua.measure.iv()")
-            curr_data = instr.ask("print(currenta)")
+            curr_data = instr.query("print(currenta)")
         if ch==2:
             instr.write('display.smub.measure.func = display.MEASURE_DCAMPS')
             instr.write('smub.source.func = smub.OUTPUT_DCVOLTS')
@@ -43,7 +43,7 @@ class ke2600(object):
             instr.write("smub.source.levelv = %f" % voltage)
             instr.write("smub.source.output=smub.OUTPUT_ON")
             instr.write("currentb, voltageb = smub.measure.iv()")
-            curr_data = instr.ask("print(currentb)")
+            curr_data = instr.query("print(currentb)")
         return curr_data
     def forVmeasV(instr, voltage, volt_cmpl ,ch=1):
         if ch==1:
@@ -54,7 +54,7 @@ class ke2600(object):
             instr.write("smua.source.levelv = %f"%voltage)
             instr.write("smua.source.output=smua.OUTPUT_ON")
             instr.write("currenta, voltagea = smua.measure.iv()")
-            curr_data = instr.ask("print(voltagea)")
+            curr_data = instr.query("print(voltagea)")
         if ch==2:
             instr.write('smub.sense = smub.SENSE_REMOTE')
             instr.write('display.smub.measure.func = display.MEASURE_DCVOLTS')
@@ -63,7 +63,7 @@ class ke2600(object):
             instr.write("smub.source.levelv = %f" % voltage)
             instr.write("smub.source.output=smub.OUTPUT_ON")
             instr.write("currentb, voltageb = smub.measure.iv()")
-            curr_data = instr.ask("print(voltageb)")
+            curr_data = instr.query("print(voltageb)")
         return curr_data
     def autorang_forVmeasI(instr,ch=1):
         if ch==1:

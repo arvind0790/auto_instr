@@ -94,7 +94,6 @@ class keyafg33600(object):
     def Burst_Immediate_mode(instr, channel, nocyc, pha, per):
         instr.write('SOUR%i:BURS:NCYC %i' % (channel, nocyc))
         instr.write('TRIG1:SOUR IMM')
-<<<<<<< .mine
         instr.write('SOUR1:BURST:PHASE %f'%pha)
         instr.write('SOUR1:BURS:INT:PER %f'%per)
         instr.write('SOUR1:BURS:STAT ON')
@@ -106,17 +105,12 @@ class keyafg33600(object):
         instr.write('SOUR1:BURS:NCYC %i' % nocyc)
         instr.write('TRIG1:SOUR BUS')
         instr.write('SOUR1:BURS:STAT ON')
-        instr.write('OUTP1:STAT ON')||||||| .r11
+        instr.write('OUTP1:STAT ON')
         instr.write('SOUR1:BURST:PHASE %f'%pha)
         instr.write('SOUR1:BURS:INT:PER %f'%per)
         instr.write('SOUR1:BURS:STAT ON')
         instr.write('OUTP1:STAT ON')
-        
-=======
         instr.write('SOUR%i:BURST:PHASE %f' % (channel, pha))
         instr.write('SOUR%i:BURS:INT:PER %f' % (channel, per))
         instr.write('SOUR%i:BURS:STAT ON' % channel)
         instr.write('OUTP%i:STAT ON' % channel)
-
-
->>>>>>> .r21

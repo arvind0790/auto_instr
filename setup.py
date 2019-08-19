@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name='auto_instr',
-    version='0.8.1',
+    version='0.9',
     author='Arvind Kumar',
     author_email='vind0790@gmail.com',
     packages=find_packages(),

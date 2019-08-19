@@ -12,6 +12,7 @@ auto_instr/keithley2000.py
 auto_instr/keithley2400.py
 auto_instr/keithley2600.py
 auto_instr/keysight33600afg.py
+auto_instr/psw_800.py
 auto_instr/tektronixafg3102.py
 auto_instr/tempforce.py
 auto_instr.egg-info/PKG-INFO

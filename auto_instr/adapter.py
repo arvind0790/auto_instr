@@ -1,5 +1,6 @@
 import visa
 rm = visa.ResourceManager()
+# rm = visa.ResourceManager('@py')
 class gpib(object):
     def addr(gpib_no,gpib_port):
         add_var = 'GPIB%d::%d::INSTR' % (gpib_no,gpib_port)
@@ -35,3 +36,29 @@ class usb_debug(object):
         add_var = usbid
         inst = rm.open_resource(add_var)
         return inst
+
+class enumerate():
+    @staticmethod
+    def all_resources():
+        all_res = rm.list_resources()
+        print(all_res)
+        return all_res
+
+    @staticmethod
+    def IDN():
+        list = enumerate.all_resources()
+        valid_res =[]
+        for res in list:
+            try:
+                print('Pinging - %s' %res)
+                open_res = rm.open_resource(res)
+                print('Link opened')
+                idn_query = open_res.query('*IDN?')
+                print(idn_query)
+                valid_res.append([res,idn_query])
+                open_res.close()
+            except:
+                print('Communication failed')
+                pass
+        print(valid_res)
+        return valid_res

@@ -1,3 +1,8 @@
-1) Added infiniium scope basic functions
+1) Adapter - Enumerate and pinging function added.
+2) Keithley 2000 - Added following options integration_rate, auto_range_en ,filter_en,filter_type and filter_average_count.
+3) Tempforce - Added external sensors (T and K type) function (default it will be disabled). 
+			   Plotting function is also added to visualize the ramp rate.
+			   Purge function added to defrost the DUT (to reduce the moisture in between long experiments at cold temperatures).
+4) Keithley 2600 - Replaced ask with query, since the former is deprecated.
 
  

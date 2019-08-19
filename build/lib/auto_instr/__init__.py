@@ -4,6 +4,7 @@ from .adapter import lan
 from .adapter import lan_debug
 from .adapter import usb
 from .adapter import usb_debug
+from .adapter import enumerate
 from .dpo7104 import scope
 from .tempforce import tempforce
 from .tektronixafg3102 import tekafg3102
@@ -16,3 +17,4 @@ from .keysight33600afg import keyafg33600
 from .agilent34405dmm import agi34405
 from .keithley2600 import ke2600
 from .infiniium80000 import infi_scope
+from .psw_800 import PSW800
