@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: auto-instr
-Version: 0.9
+Version: 0.9.3
 Summary: Library for automating scientific instruments.
 Home-page: https://github.com/arvind0790/auto_instr
 Author: Arvind Kumar

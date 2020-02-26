@@ -25,6 +25,7 @@ class scope(object):
         instr.write('MEASU:IMM:REFL:METH ABS')
         instr.write('MEASU:IMM:REFL:ABS:HIGH %f' % abs_max_ref_lev)
         instr.write('MEASU:IMM:REFL:ABS:LOW %f' % abs_min_ref_lev)
+
     def set_perc_ref_lev(instr,perc_min_ref_lev=10,perc_max_ref_lev=90):
         instr.write('MEASU:IMM:REFL:METH PERC')
         instr.write('MEASU:IMM:REFL:PERC:HIGH %f' % perc_max_ref_lev)
@@ -34,14 +35,16 @@ class scope(object):
         instr.write('MEASU:IMM:REFL:METH ABS')
         instr.write('MEASU:IMM:REFL:ABS:MID1 %f' % abs_mid1_ref_lev)
         instr.write('MEASU:IMM:REFL:ABS:MID2 %f' % abs_mid2_ref_lev)
+
     def set_perc_mid_ref_lev(instr,perc_mid1_ref_lev=50,perc_mid2_ref_lev=50):
         instr.write('MEASU:IMM:REFL:METH PERC')
         instr.write('MEASU:IMM:REFL:PERC:MID1 %f' % perc_mid1_ref_lev)
         instr.write('MEASU:IMM:REFL:PERC:MID2 %f' % perc_mid2_ref_lev)
 
 ############ Acquisition modes ########################
-    def clear_all(instr):
-        instr.write('CLEAR ALL')
+    def clear(instr):
+        instr.write('CLEAR')
+
     def run(instr):
         instr.write('ACQ:STATE RUN')
 
@@ -113,8 +116,6 @@ class scope(object):
         return float(instr.query('MEASU:IMM:VAL?'))
 
     def export_screenshot(instr,filename):
-        # print(filename)
-        # sleep(1)
         instr.write('EXP:FILEN ' + '\"' + filename + '.PNG' + '\"')
         instr.write('EXP STAR')
         instr.write('EXP:FOR PNG')
@@ -135,11 +136,11 @@ class scope(object):
  
  ############### trigger functions ##################
 
-    def trigger_level(instr):
-        instr.write('TRIG:A:LEV:CH2 6.2')
+    def trigger_level(instr, ch_no, lev):
+        instr.write('TRIG:A:LEV:CH%i %f' %(ch_no, lev))
 
-    def trigger_level_query(instr):
-        return float(instr.query('TRIG:A:LEV:CH2 ?'))
+    def trigger_level_query(instr,ch_no):
+        return float(instr.query('TRIG:A:LEV:CH%i?' %ch_no))
     
     def trigger_quickset(instr, ch_no,lev):
         instr.write('TRIG:A:EDGE:SOU CH%i' %ch_no)
@@ -156,7 +157,6 @@ class scope(object):
         instr.write('TRIG:A:EDGE:SLO:CH%i FALL' % ch_no)
         instr.write('TRIG:A:LEV:CH%i %f' %(ch_no, lev))
 
-
     def single_acquisition_quickset(instr,ch_no,lev,edge='RISE'): #use FALL for falling egde trigger
         scope.run(instr)
         if edge =='FALL':
@@ -165,17 +165,8 @@ class scope(object):
             scope.trigger_quickset_rise(instr, ch_no, lev)
         scope.meas_cls(instr)
         scope.single(instr)
-<<<<<<< .mine
 
-
-    def scope_trig_pulsewidth(instr, ch_no, lev, lowerlimit, upperlimit ):
-        instr.write('CLEAR ALL')
-||||||| .r11
     def scope_trig_pulsewidth(instr,ch_no,lev,upperlimit,lowerlimit):
-=======
-    
-    def scope_trig_pulsewidth(instr,ch_no,lev,upperlimit,lowerlimit):
->>>>>>> .r21
         instr.write('ACQ:STATE RUN')
         instr.write('ACQ:STATE ON')
         instr.write('ACQ:STOPA RUNST')
@@ -194,25 +185,32 @@ class scope(object):
     
     def dpojet_clr_meas(instr):
         instr.write('DPOJET:CLEARALLM')
+
     def dpojet_state(instr):
         return instr.query('DPOJET:STATE?')
+
     def dpojet_run(instr):
         instr.write('DPOJET:STATE RUN')
+
     def dpojet_stop(instr):
         instr.write('DPOJET:STATE STOP')
+
     def dpojet_population(instr,n):
         instr.write('DPOJET:POPULATION:LIMIT %i' %n)
         instr.write('DPOJET:POPULATION:STATE 1')
+
     def dpojet_period(instr):
         instr.write('DPOJET:ADDM PERI')
+
     def dpojet_result(instr):
         data = instr.query('DPOJET:MEAS1:RESUL:ALLA?').split(';;')
-        # print(data)
         return data
+
     def dpojet_status_query(instr):
         data = instr.query('DPOJET:MEAS1:RESUL:ALLA?').split(';;')
         curr_popu = int(data[0])
         return curr_popu
+
     def dpojet_quickset(instr,n):
         scope.dpojet_stop(instr)
         scope.dpojet_clr_meas(instr)

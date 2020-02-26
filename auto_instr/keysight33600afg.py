@@ -20,13 +20,13 @@ class keyafg33600(object):
     def shape(instr, channel, shape, duty_cycle=50):
         if shape == 'SQU':
             instr.write('SOUR%i:FUNC:SHAP SQU' %channel)  # SIN,SQU,RAMP,PULS
+            instr.write('SOUR%i:FUNC:SQU:DCYC %f' %(channel,duty_cycle))
         elif shape == 'SIN':
             instr.write('SOUR%i:FUNC:SHAP SIN' %channel)
         elif shape == 'RAMP':
             instr.write('SOUR%i:FUNC:SHAP RAMP' %channel)
         elif shape == 'PULS':
             instr.write('SOUR%i:FUNC:SHAP PULS' %channel)
-            instr.write('SOUR%i:PULS:DCYC %f'%duty_cycle)
         else:
             print("Invalid input")
 
@@ -99,9 +99,9 @@ class keyafg33600(object):
         instr.write('SOUR1:BURS:STAT ON')
         instr.write('OUTP1:STAT ON')
         
-    def Burst_arbitary_remote_trigger(instr,nocyc):
-        instr.write('MMEM:DATA "usb:\Myfiles\xx.arb"')
-        instr.write('SOUR1:ARB "usb:\Myfiles\xx.arb"')
+    def Burst_arbitary_remote_trigger(instr,nocyc,file_name):
+        instr.write('MMEM:DATA "usb:\Myfiles\%s.arb"'%file_name)
+        instr.write('SOUR1:ARB "usb:\Myfiles\%s.arb"'%file_name)
         instr.write('SOUR1:BURS:NCYC %i' % nocyc)
         instr.write('TRIG1:SOUR BUS')
         instr.write('SOUR1:BURS:STAT ON')

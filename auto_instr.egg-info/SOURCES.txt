@@ -8,6 +8,7 @@ auto_instr/datalog.py
 auto_instr/dpo7104.py
 auto_instr/hpmm3458A.py
 auto_instr/infiniium80000.py
+auto_instr/infiniium90804A.py
 auto_instr/keithley2000.py
 auto_instr/keithley2400.py
 auto_instr/keithley2600.py

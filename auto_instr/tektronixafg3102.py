@@ -1,4 +1,5 @@
 class tekafg3102(object):
+
     def off(instr,channel):
         instr.write('OUTP%i:STAT OFF' %channel)
 
@@ -19,13 +20,13 @@ class tekafg3102(object):
     def shape(instr, channel, shape,duty_cycle=50):
         if shape == 'SQU':
             instr.write('SOUR%i:FUNC:SHAP SQU' %channel)  # SIN,SQU,RAMP,PULS
+            instr.write('SOUR%i:FUNC:SQU:DCYC %f' % (channel, duty_cycle))
         elif shape == 'SIN':
             instr.write('SOUR%i:FUNC:SHAP SIN' %channel)
         elif shape == 'RAMP':
             instr.write('SOUR%i:FUNC:SHAP RAMP' %channel)
         elif shape == 'PULS':
             instr.write('SOUR%i:FUNC:SHAP PULS' %channel)
-            instr.write('SOUR%i:PULS:DCYC %f' % duty_cycle)
         elif shape == 'USER1':
             instr.write('SOUR%i:FUNC:SHAP USER1' % channel)
         elif shape == 'USER2':
@@ -56,7 +57,7 @@ class tekafg3102(object):
     def quickset(instr, channel, imp, shape, frequency, phase, offset, amplitude,duty_cycle=50):
         tekafg3102.on(instr, channel)
         tekafg3102.outimp(instr, channel, imp)
-        tekafg3102.shape(instr, channel, shape,duty_cycle)
+        tekafg3102.shape(instr, channel, shape, duty_cycle)
         tekafg3102.freq(instr, channel, frequency)
         tekafg3102.phase(instr, channel, phase)
         tekafg3102.offset(instr, channel, offset)
@@ -72,7 +73,6 @@ class tekafg3102(object):
         instr.write('SOUR%i:BURS:NCYCles 1' % channel)
         instr.write('SOUR%i:FREQ:FIX %fHz' % (channel, freq))
         instr.write('OUTP%i:STAT 1' % channel)
-<<<<<<< .mine
 
 
     def Burst_Remote_with_Delay(instr, channel1, channel2, nocyc1, nocyc2, delay1,unit1, delay2,unit2):
@@ -96,9 +96,6 @@ class tekafg3102(object):
         instr.write('SOUR%i:BURS:STAT ON' % channel)
         instr.write('OUTP%i:STAT ON' % channel)
 
-
-
-||||||| .r11
     def Burst_Exttrig_mode(instr,nocyc,exttriglev,pha):
         instr.write('SOUR1:BURS:NCYC %i'%nocyc)
         instr.write('TRIG1:SOUR EXT')
@@ -107,12 +104,14 @@ class tekafg3102(object):
         instr.write('SOUR1:BURST:PHASE %f'%pha)
         instr.write('SOUR1:BURS:STAT ON')
         instr.write('OUTP1:STAT ON')
+
     def Burst_Remote_mode(instr,nocyc,pha):
         instr.write('SOUR1:BURS:NCYC %i'%nocyc)
         instr.write('TRIG1:SOUR BUS')       
         instr.write('SOUR1:BURST:PHASE %f'%pha)
         instr.write('SOUR1:BURS:STAT ON')
         instr.write('OUTP1:STAT ON')
+
     def Burst_Immediate_mode(instr,nocyc,pha,per):
         instr.write('SOUR1:BURS:NCYC %i'%nocyc)
         instr.write('TRIG1:SOUR IMM')
@@ -120,7 +119,6 @@ class tekafg3102(object):
         instr.write('SOUR1:BURS:INT:PER %f'%per)
         instr.write('SOUR1:BURS:STAT ON')
         instr.write('OUTP1:STAT ON')
-=======
 
     def highlow(instr, channel, low, high, frequency, imp):
         tekafg3102.shape(instr, channel, 'SQU')
@@ -160,4 +158,4 @@ class tekafg3102(object):
         instr.write('SOUR%i:BURS:INT:PER %f'%(channel,per))
         instr.write('SOUR%i:BURS:STAT ON'%channel)
         instr.write('OUTP%i:STAT ON'%channel)
->>>>>>> .r21
+

@@ -1,7 +1,7 @@
 from auto_instr import serial
 from time import sleep
 
-class tempforce_exp(object):
+class tempforce(object):
 
     def flow_off(instr):
         instr.write('FLOW 0\n')

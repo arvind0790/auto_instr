@@ -1,4 +1,4 @@
-class ke2000_exp(object):
+class ke2000(object):
     
     ## DC VOLTAGE##
     def read_DCV(instr,integration_rate = 1, auto_range_en =1 ,filter_en=0,filter_type = 'MOV',
